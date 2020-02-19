@@ -37,14 +37,14 @@ Done so far
 - Apply jmespath query
 - Format in a nice table (still a lot of improvements to be done)
 - File watcher
+- Check parents for config file
+- Check CWD for config file
+- Check home for config file
 
 TODO
 
 - Max line
 - Invert order
 - Build it so you dont have to `npm i ts-node -g`
-- Travers parents for config file
-- Check CWD for config file
-- Check home for config file
 - Check for config filename with the log filename in it to allow different logs in the same folder to have different configurations (format TBD)
 - Conditionnal coloring

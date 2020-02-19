@@ -1,6 +1,7 @@
 import { JsonLogOptions } from "./models/json-log-options";
 import fs from "fs";
 import minimist from "minimist";
+import os from "os";
 import path from "path";
 import util from "util";
 
@@ -17,12 +18,15 @@ export class JsonLogOptionsFactory {
   }
 
   private async getOptionsFromConfigFile(forLogFilePath: string) {
-    const configPath = path.join(path.dirname(forLogFilePath), ".jsonlogviewer.json");
-    const configExists = await exists(configPath);
-    if (!configExists) return null;
-    const configFile = await fs.promises.readFile(configPath, "utf8");
-    const configFileJson = JSON.parse(configFile) as JsonLogOptions;
-    return configFileJson;
+    let configPath = path.join(path.dirname(forLogFilePath));
+    return (
+      (await this.tryGetOptionsFromConfigFile(configPath)) ??
+      (await this.tryGetOptionsFromConfigFile((configPath = path.dirname(configPath)))) ??
+      (await this.tryGetOptionsFromConfigFile((configPath = path.dirname(configPath)))) ??
+      (await this.tryGetOptionsFromConfigFile((configPath = path.dirname(configPath)))) ??
+      (await this.tryGetOptionsFromConfigFile(process.cwd())) ??
+      (await this.tryGetOptionsFromConfigFile(os.homedir()))
+    );
   }
 
   private parseArguments(args: string[]): JsonLogOptions {
@@ -33,5 +37,14 @@ export class JsonLogOptionsFactory {
     if (obj.colors) result.colors = (obj.colors as string).split(",").map(color => color.trim());
     if (obj.bgColors) result.bgColors = (obj.bgColors as string).split(",").map(color => color.trim());
     return result;
+  }
+
+  private async tryGetOptionsFromConfigFile(pathToConfigDirectory: string) {
+    const pathToConfigFile = path.join(pathToConfigDirectory, ".jsonlogviewer.json");
+    const configExists = await exists(pathToConfigFile);
+    if (!configExists) return null;
+    const configFile = await fs.promises.readFile(pathToConfigFile, "utf8");
+    const configFileJson = JSON.parse(configFile) as JsonLogOptions;
+    return configFileJson;
   }
 }
