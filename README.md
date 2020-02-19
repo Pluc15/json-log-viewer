@@ -8,10 +8,9 @@ Done so far
 - Load config from file
 - Apply colors
 - Apply jmespath query
+- Format in a nice table (still a lot of improvements to be done)
 
 TODO
 
-- Format
 - File watcher
-- Format in a nice table
 - Tests

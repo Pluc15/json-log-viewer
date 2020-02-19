@@ -1,3 +1,5 @@
 {
-  "colors": ["red"]
+  "jmespath": "[some,and.here]",
+  "colors": ["red"],
+  "bgColors": ["grey"]
 }

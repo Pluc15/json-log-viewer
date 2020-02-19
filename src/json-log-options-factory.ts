@@ -11,7 +11,6 @@ export class JsonLogOptionsFactory {
     var cliOptions = this.parseArguments(args);
     var fileOptions = await this.getOptionsFromConfigFile(cliOptions.filePath);
     var result = Object.assign({}, fileOptions, cliOptions);
-    console.log(result, fileOptions, cliOptions);
     if (!(await exists(result.filePath))) throw new Error(`File '${result.filePath}' not found`);
     if (result.jmespath == null) throw new Error("--jmespath required");
     return result;
@@ -32,6 +31,7 @@ export class JsonLogOptionsFactory {
     if (obj._ && obj._.length > 0) result.filePath = path.resolve(obj._[0]);
     if (obj.jmespath) result.jmespath = obj.jmespath;
     if (obj.colors) result.colors = (obj.colors as string).split(",").map(color => color.trim());
+    if (obj.bgColors) result.bgColors = (obj.bgColors as string).split(",").map(color => color.trim());
     return result;
   }
 }
