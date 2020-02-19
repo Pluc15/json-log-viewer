@@ -11,10 +11,6 @@ export class JsonLogFormatter {
   }
 
   private parse(json: string, options: JsonLogOptions): string[] {
-    try {
-      return jmespath.search(JSON.parse(json), options.jmespath);
-    } catch {
-      return ["Error"];
-    }
+    return jmespath.search(JSON.parse(json), options.jmespath);
   }
 }
