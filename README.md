@@ -9,8 +9,9 @@ Done so far
 - Apply colors
 - Apply jmespath query
 - Format in a nice table (still a lot of improvements to be done)
+- File watcher
 
 TODO
 
-- File watcher
-- Tests
+- Max line
+- Invert order

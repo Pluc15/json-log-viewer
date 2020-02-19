@@ -13,6 +13,7 @@ export class JsonLogPrinter {
         if (chalkFn) logs[rowIdx][colIdx] = chalkFn(col);
       });
     });
+    console.clear();
     console.log(logs.map(row => row.join(" | ")).join("\n"));
   }
 }
