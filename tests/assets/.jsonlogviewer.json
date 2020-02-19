@@ -1,5 +1,6 @@
 {
   "jmespath": "[some,and.here]",
   "colors": ["red"],
-  "bgColors": ["grey"]
+  "bgColors": ["grey"],
+  "maxLines": 5
 }

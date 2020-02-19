@@ -6,12 +6,15 @@ import path from "path";
 import util from "util";
 
 const exists = util.promisify(fs.exists);
+const defaultOptions = {
+  maxLines: 20
+} as JsonLogOptions;
 
 export class JsonLogOptionsFactory {
   async getOptions(args: string[]): Promise<JsonLogOptions> {
     var cliOptions = this.parseArguments(args);
     var fileOptions = await this.getOptionsFromConfigFile(cliOptions.filePath);
-    var result = Object.assign({}, fileOptions, cliOptions);
+    var result = Object.assign({}, defaultOptions, fileOptions, cliOptions);
     if (!(await exists(result.filePath))) throw new Error(`File '${result.filePath}' not found`);
     if (result.jmespath == null) throw new Error("--jmespath required");
     return result;

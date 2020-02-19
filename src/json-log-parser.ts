@@ -7,6 +7,8 @@ export class JsonLogFormatter {
       .split("\n")
       .map(json => json.trim())
       .filter(json => json)
+      .reverse()
+      .slice(0, options.maxLines)
       .map(json => this.parse(json, options));
   }
 
