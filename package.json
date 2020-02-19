@@ -1,0 +1,43 @@
+{
+  "name": "json-log-viewer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "bin": {
+    "jlv": "./index.ts"
+  },
+  "scripts": {
+    "start": "ts-node index.ts",
+    "clean": "eslint --fix 'src/**/*' && import-sort --write 'src/**/*' && prettier --write 'src/**/*'",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run clean"
+    }
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^25.1.3",
+    "@types/jmespath": "^0.15.0",
+    "@types/minimist": "^1.2.0",
+    "@types/node": "^13.7.4",
+    "@typescript-eslint/eslint-plugin": "^2.20.0",
+    "@typescript-eslint/parser": "^2.20.0",
+    "eslint": "^6.8.0",
+    "husky": "^4.2.3",
+    "import-sort-cli": "^6.0.0",
+    "jest": "^25.1.0",
+    "prettier": "^1.19.1",
+    "ts-jest": "^25.2.1",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.7.5"
+  },
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "jmespath": "^0.15.0",
+    "minimist": "^1.2.0"
+  }
+}
