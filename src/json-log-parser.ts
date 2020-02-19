@@ -3,7 +3,11 @@ import jmespath from "jmespath";
 
 export class JsonLogFormatter {
   parseAll(logContent: string, options: JsonLogOptions): string[][] {
-    return logContent.split("\n").map(json => this.parse(json, options));
+    return logContent
+      .split("\n")
+      .map(json => json.trim())
+      .filter(json => json)
+      .map(json => this.parse(json, options));
   }
 
   private parse(json: string, options: JsonLogOptions): string[] {
